@@ -4,6 +4,7 @@ import "go-colortext"
 import (
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -17,14 +18,22 @@ func main() {
 
 	flag.Parse()
 	dir, _ := os.Getwd()
-	file_list, _ := filepath.Glob(dir + "/*")
-
+	file_list, err := filepath.Glob(dir + "/*")
+	if err != nil {
+		log.Fatal(err)
+	}
 	var regularFiles = make(map[string]map[string]string)
 	var dirFiles = make(map[string]map[string]string)
 
 	for _, file := range file_list {
-		f, _ := os.Open(file)
-		fi, _ := f.Stat()
+		f, err := os.Open(file)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fi, err := f.Stat()
+		if err != nil {
+			log.Fatal(err)
+		}
 		switch mode := fi.Mode(); {
 		case mode.IsDir():
 			dirFiles[fi.Name()] = map[string]string{
