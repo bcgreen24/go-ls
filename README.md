@@ -11,4 +11,5 @@ Usage:
 gls: list files and directories in the current directory
 
 Switches:
--filesize: also show the size of the files being listed
+-size: also show the size of the files being listed
+-date: also show the modification date of files
