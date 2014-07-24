@@ -26,24 +26,20 @@ func main() {
 	var dirFiles = make(map[string]map[string]string)
 
 	for _, file := range file_list {
-		f, err := os.Open(file)
+		f, err := os.Stat(file)
 		if err != nil {
 			log.Fatal(err)
 		}
-		fi, err := f.Stat()
-		if err != nil {
-			log.Fatal(err)
-		}
-		switch mode := fi.Mode(); {
-		case mode.IsDir():
-			dirFiles[fi.Name()] = map[string]string{
-				"size": strconv.FormatInt(fi.Size(), 10),
-				"date": fi.ModTime().Format(layout),
+		switch mode := f.IsDir(); {
+		case mode == true:
+			dirFiles[f.Name()] = map[string]string{
+				"size": strconv.FormatInt(f.Size(), 10),
+				"date": f.ModTime().Format(layout),
 			}
-		case mode.IsRegular():
-			regularFiles[fi.Name()] = map[string]string{
-				"size": strconv.FormatInt(fi.Size(), 10),
-				"date": fi.ModTime().Format(layout),
+		case mode == false:
+			regularFiles[f.Name()] = map[string]string{
+				"size": strconv.FormatInt(f.Size(), 10),
+				"date": f.ModTime().Format(layout),
 			}
 		}
 	}
