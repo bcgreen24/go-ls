@@ -7,10 +7,14 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"sort"
 	"strconv"
 )
 
 const layout = "Jan 2, 2006 at 3:04pm"
+
+var regularFiles = make(map[string]map[string]string)
+var dirFiles = make(map[string]map[string]string)
 
 func main() {
 	var option = flag.Bool("size", false, "Show file sizes")
@@ -22,8 +26,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	var regularFiles = make(map[string]map[string]string)
-	var dirFiles = make(map[string]map[string]string)
 
 	for _, file := range file_list {
 		f, err := os.Stat(file)
@@ -44,21 +46,36 @@ func main() {
 		}
 	}
 
-	for key, _ := range dirFiles {
-		ct.ChangeColor(ct.Green, true, ct.None, false)
-		fmt.Println(key)
+	dir_keys := make([]string, 0, len(dirFiles))
+	for k := range dirFiles {
+		dir_keys = append(dir_keys, k)
 	}
 
-	for key, value := range regularFiles {
+	sort.Strings(dir_keys)
+
+	file_keys := make([]string, 0, len(regularFiles))
+	for k := range regularFiles {
+		file_keys = append(file_keys, k)
+	}
+
+	sort.Strings(file_keys)
+
+	for i := range dir_keys {
+		ct.ChangeColor(ct.Green, true, ct.None, false)
+		fmt.Println(dir_keys[i])
+	}
+
+	for i := range file_keys {
 		ct.ChangeColor(ct.White, true, ct.None, false)
-		line := key
+		line := regularFiles[file_keys[i]]
+		output := file_keys[i]
 		if *option == true {
-			line += " | " + value["size"]
+			output += " | " + line["size"]
 		}
 		if *mod_date == true {
-			line += " | " + value["date"]
+			output += " | " + line["date"]
 		}
-		fmt.Println(line)
+		fmt.Println(output)
 	}
 	ct.ResetColor()
 }
