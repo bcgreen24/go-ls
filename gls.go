@@ -46,34 +46,34 @@ func main() {
 		}
 	}
 
-	dir_keys := make([]string, 0, len(dirFiles))
+	dirKeys := make([]string, 0, len(dirFiles))
 	for k := range dirFiles {
-		dir_keys = append(dir_keys, k)
+		dirKeys = append(dirKeys, k)
 	}
 
-	sort.Strings(dir_keys)
+	sort.Strings(dirKeys)
 
-	file_keys := make([]string, 0, len(regularFiles))
+	var fileKeys = make([]string, 0, len(regularFiles))
 	for k := range regularFiles {
-		file_keys = append(file_keys, k)
+		fileKeys = append(fileKeys, k)
 	}
 
-	sort.Strings(file_keys)
+	sort.Strings(fileKeys)
 
-	for i := range dir_keys {
+	for i := range dirKeys {
 		ct.ChangeColor(ct.Green, true, ct.None, false)
-		fmt.Println(dir_keys[i])
+		fmt.Println(dirKeys[i])
 	}
 
-	for i := range file_keys {
+	for i := range fileKeys {
 		ct.ChangeColor(ct.White, true, ct.None, false)
-		line := regularFiles[file_keys[i]]
-		output := fmt.Sprintf("%-16s", file_keys[i])
+		line := regularFiles[fileKeys[i]]
+		output := fmt.Sprintf("%-16s", fileKeys[i])
 		if *fileSize == true {
-			output += fmt.Sprintf("%-16s", " | " + line["size"])
+			output += fmt.Sprintf("%-16s", " | "+line["size"])
 		}
 		if *modDate == true {
-			output += fmt.Sprintf("%-8s", " | " + line["date"])
+			output += fmt.Sprintf("%-8s", " | "+line["date"])
 		}
 		fmt.Println(output)
 	}
