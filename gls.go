@@ -17,17 +17,17 @@ var regularFiles = make(map[string]map[string]string)
 var dirFiles = make(map[string]map[string]string)
 
 func main() {
-	var option = flag.Bool("size", false, "Show file sizes")
-	var mod_date = flag.Bool("date", false, "Show modification dates")
+	var fileSize = flag.Bool("size", false, "Show file sizes")
+	var modDate = flag.Bool("date", false, "Show modification dates")
 
 	flag.Parse()
 	dir, _ := os.Getwd()
-	file_list, err := filepath.Glob(dir + "/*")
+	fileList, err := filepath.Glob(dir + "/*")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	for _, file := range file_list {
+	for _, file := range fileList {
 		f, err := os.Stat(file)
 		if err != nil {
 			log.Fatal(err)
@@ -68,12 +68,12 @@ func main() {
 	for i := range file_keys {
 		ct.ChangeColor(ct.White, true, ct.None, false)
 		line := regularFiles[file_keys[i]]
-		output := file_keys[i]
-		if *option == true {
-			output += " | " + line["size"]
+		output := fmt.Sprintf("%-16s", file_keys[i])
+		if *fileSize == true {
+			output += fmt.Sprintf("%-16s", " | " + line["size"])
 		}
-		if *mod_date == true {
-			output += " | " + line["date"]
+		if *modDate == true {
+			output += fmt.Sprintf("%-8s", " | " + line["date"])
 		}
 		fmt.Println(output)
 	}
