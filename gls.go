@@ -2,7 +2,6 @@ package main
 
 import "go-colortext"
 import (
-	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -11,16 +10,11 @@ import (
 	"strconv"
 )
 
-const layout = "Jan 2, 2006 at 3:04pm"
-
 var regularFiles = make(map[string]map[string]string)
 var dirFiles = make(map[string]map[string]string)
 
 func main() {
-	var fileSize = flag.Bool("size", false, "Show file sizes")
-	var modDate = flag.Bool("date", false, "Show modification dates")
 
-	flag.Parse()
 	dir, _ := os.Getwd()
 	fileList, err := filepath.Glob(dir + "/*")
 	if err != nil {
@@ -62,20 +56,19 @@ func main() {
 
 	for i := range dirKeys {
 		ct.ChangeColor(ct.Green, true, ct.None, false)
-		fmt.Println(dirKeys[i])
+		fmt.Printf("%v\n", dirKeys[i])
 	}
+
+	output := ""
 
 	for i := range fileKeys {
 		ct.ChangeColor(ct.White, true, ct.None, false)
 		line := regularFiles[fileKeys[i]]
-		output := fmt.Sprintf("%-16s", fileKeys[i])
-		if *fileSize == true {
-			output += fmt.Sprintf("%-16s", " | "+line["size"])
-		}
-		if *modDate == true {
-			output += fmt.Sprintf("%-8s", " | "+line["date"])
-		}
-		fmt.Println(output)
+		output += fmt.Sprintf(" %-32s", line["date"])
+		output += fmt.Sprintf("%-12s ", line["size"])
+		output += fmt.Sprintf(" %v\n", fileKeys[i])
+
 	}
+	fmt.Println(output)
 	ct.ResetColor()
 }
