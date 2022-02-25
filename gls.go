@@ -10,7 +10,7 @@ import (
 	"strconv"
 )
 
-const layout = "Jan 2, 2006 at 3:04pm"
+const layout = "Jan 2, 2020 at 3:04pm"
 
 var regularFiles = make(map[string]map[string]string)
 var dirFiles = make(map[string]map[string]string)
