@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dd23853d-ff95-4612-95ec-96e51d426ec3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gls.exe" beforeDir="false" afterPath="$PROJECT_DIR$/gls.exe" afterDir="false" />
+    <list default="true" id="dd23853d-ff95-4612-95ec-96e51d426ec3" name="Changes" comment="text formatting changes, removed args">
       <change beforePath="$PROJECT_DIR$/gls.go" beforeDir="false" afterPath="$PROJECT_DIR$/gls.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,8 +75,16 @@
       <updated>1644594624526</updated>
       <workItem from="1644594628510" duration="346000" />
       <workItem from="1645675983573" duration="1291000" />
-      <workItem from="1645830044199" duration="49000" />
+      <workItem from="1645830044199" duration="238000" />
     </task>
+    <task id="LOCAL-00001" summary="text formatting changes, removed args">
+      <created>1645830220679</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1645830220679</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -89,7 +95,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -97,6 +109,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="text formatting changes, removed args" />
+    <option name="LAST_COMMIT_MESSAGE" value="text formatting changes, removed args" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
